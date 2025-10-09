@@ -18,8 +18,15 @@ export default function MaterialSelect(): React.JSX.Element {
   return (
     <Box>
       <FormControl fullWidth size='small'>
-        <InputLabel id={id.current}>Material</InputLabel>
+        <InputLabel shrink id={id.current}>Material</InputLabel>
         <Select
+        displayEmpty
+          renderValue={(selected) => {
+            if (!selected) {
+              return <span style={{ color: '#aaa' }}>Selecciona un material</span>
+            }
+            return selected
+          }}
           labelId={id.current}
           id={`${id.current}-id`}
           value={age}

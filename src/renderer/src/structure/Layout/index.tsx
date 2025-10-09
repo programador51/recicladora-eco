@@ -7,7 +7,7 @@ export default function Layout({ children }: { children: React.JSX.Element }): R
   return (
     <Box>
       <Grid container spacing={2}>
-        <Grid padding="20px 0 20px 0" size={2} component={'aside'}>
+        <Grid padding="20px 0 20px 0" size={2} component={'aside'} position={'sticky'} top={0}>
           <Nav />
         </Grid>
         <Grid size={10} padding={'20px'}>
