@@ -1,0 +1,7 @@
+export const ganancias = 'ganancias'
+export const gestion = 'gestion'
+export const ventas = 'ventas'
+export const impacto = 'impacto'
+export const reportes = 'reportes'
+export const gamificacion = 'gamificacion'
+export const logistica = 'logistica'

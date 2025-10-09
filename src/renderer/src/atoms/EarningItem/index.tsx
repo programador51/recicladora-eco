@@ -1,5 +1,5 @@
 import { Stack, Typography } from '@mui/material'
-import { grey , green } from '@mui/material/colors'
+  import { grey , green } from '@mui/material/colors'
 
 export default function EarningItem({
   material = 'Plástico PET',

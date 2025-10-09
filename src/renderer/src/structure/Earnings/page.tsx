@@ -43,7 +43,7 @@ export default function Earnings(): React.JSX.Element {
           <Stack component={'form'} flexDirection={'column'} gap={2}>
             <MaterialSelect />
             <WeightKgInput />
-            <Button variant="text" color="success" fullWidth>
+            <Button variant="contained" color="primary" fullWidth>
               Registrar material
             </Button>
           </Stack>
