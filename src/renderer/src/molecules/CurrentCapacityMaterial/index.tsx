@@ -1,6 +1,6 @@
 import React from 'react'
-import { Stack, Typography, Box } from '@mui/material'
-import { grey, green } from '@mui/material/colors'
+import { Stack, Typography } from '@mui/material'
+import { grey } from '@mui/material/colors'
 import { PropsDetailMaterial } from './types'
 
 export default function CurrentCapacityMaterial({
