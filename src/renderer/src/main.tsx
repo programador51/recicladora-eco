@@ -5,8 +5,9 @@ import App from './App'
 import { HashRouter, Routes, Route } from 'react-router'
 import Layout from './structure/Layout'
 import Earnings from './structure/Earnings/page'
-import { ganancias, gestion } from './routes'
+import { ganancias, gestion, ventas } from './routes'
 import MagamentMaterial from './structure/ManagementMaterial'
+import Sells from './structure/Sells'
 
 createRoot(document.getElementById('root')!).render(
   <HashRouter>
@@ -27,6 +28,15 @@ createRoot(document.getElementById('root')!).render(
           element={
             <Layout>
               <MagamentMaterial />
+            </Layout>
+          }
+        />
+
+        <Route
+          path={`/${ventas}`}
+          element={
+            <Layout>
+              <Sells />
             </Layout>
           }
         />
