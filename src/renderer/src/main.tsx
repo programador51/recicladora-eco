@@ -5,10 +5,11 @@ import App from './App'
 import { HashRouter, Routes, Route } from 'react-router'
 import Layout from './structure/Layout'
 import Earnings from './structure/Earnings/page'
-import { ganancias, gestion, impacto, ventas } from './routes'
+import { ganancias, gestion, impacto, logistica, ventas } from './routes'
 import MagamentMaterial from './structure/ManagementMaterial'
 import Sells from './structure/Sells'
 import AmbientImpact from './structure/AmbientImpact'
+import Logistic from './structure/Logistic'
 
 createRoot(document.getElementById('root')!).render(
   <HashRouter>
@@ -47,6 +48,15 @@ createRoot(document.getElementById('root')!).render(
           element={
             <Layout>
               <AmbientImpact />
+            </Layout>
+          }
+        />
+
+                <Route
+          path={`/${logistica}`}
+          element={
+            <Layout>
+              <Logistic/>
             </Layout>
           }
         />

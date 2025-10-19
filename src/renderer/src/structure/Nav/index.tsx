@@ -3,7 +3,7 @@ import { NavLink } from 'react-router'
 import { Button, Typography } from '@mui/material'
 import { cyan } from '@mui/material/colors'
 import {
-  gamificacion,
+  
   ganancias,
   gestion,
   impacto,
@@ -19,7 +19,7 @@ export default function Nav(): React.JSX.Element {
     { name: 'Venta', path: ventas },
     { name: 'Impacto', path: impacto },
     { name: 'Reportes', path: reportes },
-    { name: 'Gamificación', path: gamificacion },
+    // { name: 'Gamificación', path: gamificacion },
     { name: 'Logística', path: logistica }
   ]
 

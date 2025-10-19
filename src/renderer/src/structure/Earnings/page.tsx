@@ -2,34 +2,30 @@ import { Typography, Button, Stack } from '@mui/material'
 import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid'
 import EarningItem from '@renderer/atoms/EarningItem'
+import useEarnings from '@renderer/customHooks/useEarnings'
 import MaterialSelect from '@renderer/molecules/MaterialSelect'
+import { PurezaSelect } from '@renderer/molecules/QualityMaterialInput'
+import VolumenInput from '@renderer/molecules/VolumenInput'
 import WeightKgInput from '@renderer/molecules/WeightKgInput'
 
 export default function Earnings(): React.JSX.Element {
-  const items = [
-    { material: 'Plástico PET', earning: 80 },
-    { material: 'Plástico HDPE', earning: 60 },
-    { material: 'Plástico PVC', earning: 40 },
-    { material: 'Plástico LDPE', earning: 30 },
-    { material: 'Plástico PP', earning: 50 },
-    { material: 'Plástico PS', earning: 20 },
-    { material: 'Otros plásticos', earning: 10 }
-  ]
+  const hook = useEarnings()
 
   return (
     <Grid container spacing={3}>
       <Grid size={12}>
         <Typography fontWeight={'bold'} variant="h5">
-          Registro y Ganancias
+          Registro y Ganancias          
         </Typography>
       </Grid>
 
       <Grid padding="20px 0 20px 0" size={6}>
         <Card sx={{ padding: '10px 20px' }}>
           <Typography fontWeight={'bold'}>Ganancias actuales (por kg)</Typography>
+          <Typography marginBottom={2}>Pronóstico de ganancias total estimadas acorde al material que se ha registrado a travez del tiempo</Typography>
 
-          {items.map((item) => (
-            <EarningItem key={item.material} earning={item.earning} material={item.material} />
+          {hook.items.map((item) => (
+            <EarningItem id={item.id} key={item.material} earning={item.earning} material={item.material} />
           ))}
         </Card>
       </Grid>
@@ -42,7 +38,9 @@ export default function Earnings(): React.JSX.Element {
 
           <Stack component={'form'} flexDirection={'column'} gap={2}>
             <MaterialSelect />
+            <PurezaSelect/>
             <WeightKgInput />
+            <VolumenInput/>
             <Button variant="contained" color="primary" fullWidth>
               Registrar material
             </Button>
