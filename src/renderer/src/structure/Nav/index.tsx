@@ -27,9 +27,9 @@ export default function Nav(): React.JSX.Element {
         justifyContent={'center'}
       >
         <NavLink to={'/'}>
-        <IconButton>
-          <HomeIcon color="primary" />
-        </IconButton>
+          <IconButton>
+            <HomeIcon color="primary" />
+          </IconButton>
         </NavLink>
         <Typography
           // margin={'0 0 20px 0'}

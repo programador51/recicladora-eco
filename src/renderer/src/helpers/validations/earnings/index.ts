@@ -1,4 +1,5 @@
-import { Pureza } from '@renderer/molecules/QualityMaterialInput'
+import { Pureza } from '../../../molecules/QualityMaterialInput'
+// import { Pureza } from '@renderer/molecules/QualityMaterialInput'
 import * as Yup from 'yup'
 
 export interface MaterialForm {
