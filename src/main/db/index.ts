@@ -19,17 +19,18 @@ export function createSchema(): void {
     `
     ).run()
 
-    db.prepare(
-      `
-      CREATE TABLE IF NOT EXISTS Material (
-        id_material INTEGER PRIMARY KEY AUTOINCREMENT,
-        nombre_material TEXT UNIQUE NOT NULL,
-        demanda TEXT NOT NULL CHECK(demanda IN ('alta','media','baja')),
-        calidad TEXT NOT NULL CHECK(calidad IN ('alta','media','baja')),
-        borradoLogico INTEGER NOT NULL DEFAULT 0
-      );
-    `
-    ).run()
+db.prepare(`
+  CREATE TABLE IF NOT EXISTS Material (
+    id_material INTEGER PRIMARY KEY AUTOINCREMENT,
+    nombre_material TEXT NOT NULL,
+    demanda TEXT NOT NULL CHECK(demanda IN ('alta','media','baja')),
+    calidad TEXT NOT NULL CHECK(calidad IN ('alta','media','baja')),
+    ganancia DECIMAL(10,2) NOT NULL DEFAULT 0,
+    borradoLogico INTEGER NOT NULL DEFAULT 0,
+    fecha_creacion TEXT NOT NULL DEFAULT (datetime('now'))
+  );
+`).run();
+
 
     db.prepare(
       `

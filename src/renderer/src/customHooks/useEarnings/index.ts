@@ -10,11 +10,17 @@ export default function useEarnings(): ReturnUseEarnings {
     resolver: yupResolver(materialSchema)
   })
 
-  const onSubmit = (data: MaterialForm):void => {
-    console.log(data);
+  const onSubmit = (data: MaterialForm): void => {
+    const item = items.find((item) => item.id === data.id_material)
 
-    window.location.reload();
-
+    window.api
+      .insertMaterial({
+        pureza: data.pureza,
+        nombre: item?.material || '',
+        kilos_almacenados: data.kilos_almacenados,
+        volumen_almacenado_m3: data.volumen_almacenado_m3
+      })
+      .then(() => window.location.reload())
   }
 
   const [items, setItems] = useState<Earn[]>([])
@@ -23,7 +29,7 @@ export default function useEarnings(): ReturnUseEarnings {
       .getMaterials()
       .then((materials) => {
         const dbItems: Earn[] = materials.map((item) => ({
-          earning: 0,
+          earning: item.ganancia,
           material: item.nombre_material,
           id: item.id_material || window.crypto.randomUUID()
         }))

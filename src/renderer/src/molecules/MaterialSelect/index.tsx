@@ -46,7 +46,7 @@ export default function MaterialSelect({
           label="Material"
           onChange={handleChange}
         >
-          {hook.items.map((item, i) => (
+          {hook.items.filter(item=>item.earning===0).map((item, i) => (
             <MenuItem key={`${item.material}_${i}_select`} value={item.id}>
               {item.material}
             </MenuItem>

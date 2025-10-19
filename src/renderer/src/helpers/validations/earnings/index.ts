@@ -8,6 +8,11 @@ export interface MaterialForm {
   volumen_almacenado_m3: number
 }
 
+export interface MaterialFormInsert extends Omit<MaterialForm, 'id_material'> {
+  nombre:string;
+}
+
+
 export const materialSchema = Yup.object({
   id_material: Yup.number()
     .typeError('Debe ser un número')

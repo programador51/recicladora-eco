@@ -30,7 +30,7 @@ export default function Earnings(): React.JSX.Element {
             del tiempo
           </Typography>
 
-          {hook.items.map((item) => (
+          {hook.items.filter(item=>item.earning>0).map((item) => (
             <EarningItem
               id={item.id}
               key={item.material}

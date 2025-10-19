@@ -52,11 +52,11 @@ createRoot(document.getElementById('root')!).render(
           }
         />
 
-                <Route
+        <Route
           path={`/${logistica}`}
           element={
             <Layout>
-              <Logistic/>
+              <Logistic />
             </Layout>
           }
         />
