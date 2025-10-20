@@ -3,9 +3,10 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import { initDatabase } from './db'
-import { getMaterials, insertMaterial } from './models/material'
+import { getInventarioGroupedByMaterial, getMaterials, insertMaterial } from './models/material'
 import { ensureDummyWarehouse } from './models/warehouse'
 import { MaterialFormInsert } from '../renderer/src/helpers/validations/earnings'
+import { ensureDefaultUser } from './models/users'
 
 function createWindow(): void {
   // Create the browser window.
@@ -48,8 +49,6 @@ function createWindow(): void {
   }
 }
 
-
-
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
@@ -67,10 +66,11 @@ app.whenReady().then(() => {
   // IPC test
   ipcMain.on('ping', () => console.log('pong'))
 
-  createWindow();
+  createWindow()
 
-  initDatabase();
-ensureDummyWarehouse();
+  initDatabase()
+  ensureDummyWarehouse();
+  ensureDefaultUser();
 
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
@@ -95,14 +95,18 @@ ipcMain.handle('get-materials', async () => {
   return getMaterials()
 })
 
+ipcMain.handle('get-inventory',async () => {
+  return getInventarioGroupedByMaterial()
+})
+
 ipcMain.handle('insert-material', async (_, material: MaterialFormInsert) => {
   try {
     console.log('Inserting material...')
     insertMaterial({
-      kilos_almacenados:material.kilos_almacenados,
-      nombre:material.nombre,
-      pureza:material.pureza,
-      volumen_almacenado_m3:material.volumen_almacenado_m3
+      kilos_almacenados: material.kilos_almacenados,
+      nombre: material.nombre,
+      pureza: material.pureza,
+      volumen_almacenado_m3: material.volumen_almacenado_m3
     }) // Inserta en la DB
     return getMaterials() // Devuelve todos los materiales actualizados
   } catch (error) {

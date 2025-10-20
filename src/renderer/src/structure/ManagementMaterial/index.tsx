@@ -6,9 +6,12 @@ import MaterialManagementItem from '@renderer/molecules/MaterialManagementItem'
 import { PropsDetailMaterial } from '@renderer/molecules/CurrentCapacityMaterial/types'
 import CurrentCapacityMaterial from '@renderer/molecules/CurrentCapacityMaterial'
 import { PropsMaterialManagementItem } from '@renderer/molecules/MaterialManagementItem/types'
+import useManagmentMaterial from '@renderer/customHooks/useManagmentMaterial'
 
 export default function MagamentMaterial(): React.JSX.Element {
-  const items:PropsMaterialManagementItem[] = [
+  const hook = useManagmentMaterial()
+
+  const items: PropsMaterialManagementItem[] = [
     { material: 'Cartón', demanda: 'alta', calidad: 'media' },
     { material: 'PET', demanda: 'alta', calidad: 'alta' },
     { material: 'Aluminio', demanda: 'media', calidad: 'alta' },
@@ -26,7 +29,7 @@ export default function MagamentMaterial(): React.JSX.Element {
     { material: 'PET', kg: 8, m: 0.015 },
     { material: 'Aluminio', kg: 5, m: 0.01 },
     { material: 'Vidrio', kg: 12, m: 0.03 },
-    { material: 'Plastico HDPE', kg: 7, m: 0.02 },
+    { material: 'Plastico HDPE', kg: 7, m: 0.02 }
     // { material: 'Plastico LDPE', kg: 4, m: 0.01 },
     // { material: 'Acero', kg: 6, m: 0.015 },
     // { material: 'Papel', kg: 4, m: 0.01 }
@@ -42,14 +45,19 @@ export default function MagamentMaterial(): React.JSX.Element {
 
       <Grid padding="20px 0 20px 0" size={6}>
         <Card sx={{ padding: '10px 20px' }}>
-          <Typography fontWeight={'bold'}>Catálogo de materiales</Typography>
+          <Typography marginBottom={2} fontWeight={'bold'}>Catálogo y detalle de materiales</Typography>
 
-          {items.map((item) => (
-            <MaterialManagementItem
-              key={item.material}
-              material={item.material}
-              calidad={item.calidad}
-              demanda={item.demanda}
+
+          <Typography marginBottom={2}>
+            Disponibilidad del material por tipo y la cantidad existente
+          </Typography>
+
+          {hook.materials.map((item, i) => (
+            <CurrentCapacityMaterial
+              key={`material_${i}`}
+              material={item.nombre_material}
+              kg={item.total_kilos}
+              m={item.total_volumen_m3}
             />
           ))}
         </Card>
@@ -61,21 +69,26 @@ export default function MagamentMaterial(): React.JSX.Element {
             Capacidad de almacén
           </Typography>
 
+          <Typography marginBottom={2}>
+            Espacio disponible para recibir más material dentro del almacen segun el espacio libre.
+            Este es liberado con cada envio de material a los compradores/clientes
+          </Typography>
+
           <Typography fontWeight={'bold'}>Total almacenado</Typography>
-          <Typography>Kilos: 56.00 kg.</Typography>
+          <Typography>Kilos: {hook.totalKg} kg.</Typography>
           <Typography>
-            Volumen: 0.13 m<sup>3</sup>{' '}
+            Volumen: {hook.totalVol} m<sup>3</sup>
           </Typography>
 
           <Typography fontWeight={'bold'} marginTop={2}>
             Capacidad restante
           </Typography>
-          <Typography>Kilos: 199,444 kg.</Typography>
+          <Typography>Kilos: {hook.remaingKg} kg.</Typography>
           <Typography>
-            Volumen: 499.87 m<sup>3</sup>{' '}
+            Volumen: {hook.remaingVol} m<sup>3</sup>
           </Typography>
 
-          <Typography fontWeight={'bold'} marginTop={2}>
+          {/* <Typography fontWeight={'bold'} marginTop={2}>
             Detalle por material
           </Typography>
 
@@ -86,7 +99,7 @@ export default function MagamentMaterial(): React.JSX.Element {
               kg={item.kg}
               m={item.m}
             />
-          ))}
+          ))} */}
         </Card>
       </Grid>
     </Grid>

@@ -5,7 +5,8 @@ import { MainWorldApi } from './types'
 // Custom APIs for renderer
 const api: MainWorldApi = {
   getMaterials: () => ipcRenderer.invoke('get-materials'),
-  insertMaterial: (material) => ipcRenderer.invoke('insert-material', material)
+  insertMaterial: (material) => ipcRenderer.invoke('insert-material', material),
+  getInventory: () => ipcRenderer.invoke('get-inventory')
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to
