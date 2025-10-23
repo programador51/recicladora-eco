@@ -6,7 +6,8 @@ import { MainWorldApi } from './types'
 const api: MainWorldApi = {
   getMaterials: () => ipcRenderer.invoke('get-materials'),
   insertMaterial: (material) => ipcRenderer.invoke('insert-material', material),
-  getInventory: () => ipcRenderer.invoke('get-inventory')
+  getInventory: () => ipcRenderer.invoke('get-inventory'),
+  getBuyers: () => ipcRenderer.invoke('get-buyers')
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to

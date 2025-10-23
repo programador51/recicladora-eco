@@ -7,7 +7,7 @@ import { getInventarioGroupedByMaterial, getMaterials, insertMaterial } from './
 import { ensureDummyWarehouse } from './models/warehouse'
 import { MaterialFormInsert } from '../renderer/src/helpers/validations/earnings'
 import { ensureDefaultUser } from './models/users'
-import { seedCompradoresIfEmpty } from './models/buyers'
+import { getBuyers, seedCompradoresIfEmpty } from './models/buyers'
 
 function createWindow(): void {
   // Create the browser window.
@@ -70,8 +70,8 @@ app.whenReady().then(() => {
   createWindow()
 
   initDatabase()
-  ensureDummyWarehouse();
-  ensureDefaultUser();
+  ensureDummyWarehouse()
+  ensureDefaultUser()
   seedCompradoresIfEmpty()
 
   app.on('activate', function () {
@@ -97,13 +97,16 @@ ipcMain.handle('get-materials', async () => {
   return getMaterials()
 })
 
-ipcMain.handle('get-inventory',async () => {
+ipcMain.handle('get-inventory', async () => {
   return getInventarioGroupedByMaterial()
+});
+
+ipcMain.handle('get-buyers', async () => {
+  return getBuyers()
 })
 
 ipcMain.handle('insert-material', async (_, material: MaterialFormInsert) => {
   try {
-    console.log('Inserting material...')
     insertMaterial({
       kilos_almacenados: material.kilos_almacenados,
       nombre: material.nombre,

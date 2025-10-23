@@ -1,10 +1,7 @@
 import React from 'react'
 import Grid from '@mui/material/Grid'
 import Card from '@mui/material/Card'
-import { Typography, Stack, Button } from '@mui/material'
-import MaterialSelect from '@renderer/molecules/MaterialSelect'
-import WeightKgInput from '@renderer/molecules/WeightKgInput'
-import SellerInput from '@renderer/molecules/SellerInput'
+import { Typography } from '@mui/material'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -15,6 +12,7 @@ import Paper from '@mui/material/Paper'
 import CheckIcon from '@mui/icons-material/Check'
 import LocalShippingIcon from '@mui/icons-material/LocalShipping'
 import Chip from '@mui/material/Chip'
+import SaleForm from '../SaleForm'
 
 function createData(
   name: string,
@@ -58,14 +56,8 @@ export default function Sells(): React.JSX.Element {
       <Grid padding="20px 0 0 0" size={12}>
         <Card sx={{ padding: '20px' }}>
           <Typography fontWeight={'bold'}>Registrar venta</Typography>
-          <Stack component={'form'} flexDirection={'column'} gap={2} marginTop={1}>
-            <MaterialSelect onlyAvailable={true}/>
-            <WeightKgInput />
-            <SellerInput />
-            <Button fullWidth variant="contained">
-              Confirmar venta
-            </Button>
-          </Stack>
+          <SaleForm/>
+
         </Card>
       </Grid>
 
