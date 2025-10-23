@@ -46,6 +46,7 @@ const rows = [
 ]
 
 export default function Sells(): React.JSX.Element {
+
   return (
     <Grid container spacing={3}>
       <Grid size={12}>
@@ -58,7 +59,7 @@ export default function Sells(): React.JSX.Element {
         <Card sx={{ padding: '20px' }}>
           <Typography fontWeight={'bold'}>Registrar venta</Typography>
           <Stack component={'form'} flexDirection={'column'} gap={2} marginTop={1}>
-            <MaterialSelect />
+            <MaterialSelect onlyAvailable={true}/>
             <WeightKgInput />
             <SellerInput />
             <Button fullWidth variant="contained">

@@ -8,13 +8,24 @@ import { FormHelperText } from '@mui/material'
 import React, { useRef } from 'react'
 import useEarnings from '@renderer/customHooks/useEarnings'
 import { PropsOnChangeMaterial } from './types'
+import useManagmentMaterial from '@renderer/customHooks/useManagmentMaterial'
+import { Earn } from '@renderer/atoms/EarningItem/types'
 
 export default function MaterialSelect({
-  onChange = () => {}
+  onChange = () => {},
+  onlyAvailable = false
 }: PropsOnChangeMaterial): React.JSX.Element {
   const [age, setAge] = React.useState('')
 
-  const hook = useEarnings()
+  const hook = useEarnings();
+
+  const hookManag = useManagmentMaterial();
+
+  const onlyAvailableItems:Earn[] = hookManag.materials.map(item=>({
+    material: item.nombre_material,
+    id:hook.items.find(i=>i.material===item.nombre_material)?.id||window.crypto.randomUUID(),
+    earning:0
+  }))
 
   const id = useRef(`${window.crypto.randomUUID()}-select`)
 
@@ -46,11 +57,13 @@ export default function MaterialSelect({
           label="Material"
           onChange={handleChange}
         >
-          {hook.items.filter(item=>item.earning===0).map((item, i) => (
-            <MenuItem key={`${item.material}_${i}_select`} value={item.id}>
-              {item.material}
-            </MenuItem>
-          ))}
+          {(onlyAvailable ? onlyAvailableItems : hook.items)
+            .filter((item) => item.earning === 0)
+            .map((item, i) => (
+              <MenuItem key={`${item.material}_${i}_select`} value={item.id}>
+                {item.material}
+              </MenuItem>
+            ))}
         </Select>
 
         <FormHelperText>Lista de materiales manejados por la empresa</FormHelperText>

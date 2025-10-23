@@ -14,7 +14,7 @@ export function initDatabase(): void {
   const dbPath = path.join(app.getPath('userData'), 'database.db')
   fs.mkdirSync(path.dirname(dbPath), { recursive: true })
 
-  console.log('📁 Using database path:', dbPath)
+  console.log('-> Using database path:', dbPath)
 
   db = new DatabaseConstructor(dbPath)
 
