@@ -24,7 +24,7 @@ const schema = yup.object({
     .required('El peso es obligatorio')
     .typeError('El peso es obligatorio'),
   seller: yup
-    .number() 
+    .number()
     .min(1, 'El comprador no es valido')
     .positive('El comprador no es válido')
     .required('El comprador es obligatorio')
@@ -45,8 +45,14 @@ export default function SaleForm(): React.JSX.Element {
     }
   })
 
-  const onSubmit = async(data):Promise<void> => {
-    alert(JSON.stringify(data, null, 2))
+  const onSubmit = async (data): Promise<void> => {
+    window.api
+      .addSell({
+        material: data.material,
+        weightKg: data.weightKg,
+        seller: data.seller
+      })
+      .then(() => window.location.reload())
   }
 
   return (
@@ -79,7 +85,7 @@ export default function SaleForm(): React.JSX.Element {
         control={control}
         render={({ field }) => (
           <div>
-            <WeightKgInput {...field} onChange={(value) => field.onChange(value)} />
+            <WeightKgInput onChange={(value) => field.onChange(value)} />
             <ErrorMessageAtom error={errors.weightKg} />
           </div>
         )}

@@ -111,7 +111,6 @@ function createSchema(): void {
         id_comprador INTEGER NOT NULL,
         kilos_vendidos DECIMAL(10,2) NOT NULL,
         entregado INTEGER NOT NULL DEFAULT 0,
-        FOREIGN KEY (id_transaccion) REFERENCES Transaccion(id_transaccion),
         FOREIGN KEY (id_comprador) REFERENCES Comprador(id_comprador)
       );
     `).run()

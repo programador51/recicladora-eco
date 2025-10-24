@@ -15,8 +15,6 @@ export default function SellerInput(props:SelectProps): React.JSX.Element {
 
   const id = useRef(`${window.crypto.randomUUID()}-select`)
 
-
-
   useEffect(() => {
     buyers.getBuyers().then((data) => setList(data))
   }, [])

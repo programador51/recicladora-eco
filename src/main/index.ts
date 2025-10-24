@@ -8,6 +8,7 @@ import { ensureDummyWarehouse } from './models/warehouse'
 import { MaterialFormInsert } from '../renderer/src/helpers/validations/earnings'
 import { ensureDefaultUser } from './models/users'
 import { getBuyers, seedCompradoresIfEmpty } from './models/buyers'
+import { getAllSells, insertSell, markSellAsDelivered, SaleFormData } from './models/sells'
 
 function createWindow(): void {
   // Create the browser window.
@@ -99,10 +100,32 @@ ipcMain.handle('get-materials', async () => {
 
 ipcMain.handle('get-inventory', async () => {
   return getInventarioGroupedByMaterial()
-});
+})
 
 ipcMain.handle('get-buyers', async () => {
   return getBuyers()
+})
+
+ipcMain.handle('add-sell', async (_, sell: SaleFormData) => {
+  try {
+    insertSell({
+      material: sell.material,
+      weightKg: sell.weightKg,
+      seller: sell.seller
+    })
+
+    return
+  } catch (error) {
+    console.log(error)
+  }
+})
+
+ipcMain.handle('get-sells', async () => {
+  return getAllSells()
+})
+
+ipcMain.handle('mark-sell-as-delivered', async (_, idVenta: number) => {
+  return markSellAsDelivered(idVenta)
 })
 
 ipcMain.handle('insert-material', async (_, material: MaterialFormInsert) => {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Grid from '@mui/material/Grid'
 import Card from '@mui/material/Card'
 import { Typography } from '@mui/material'
@@ -10,40 +10,17 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import CheckIcon from '@mui/icons-material/Check'
-import LocalShippingIcon from '@mui/icons-material/LocalShipping'
 import Chip from '@mui/material/Chip'
 import SaleForm from '../SaleForm'
-
-function createData(
-  name: string,
-  kg: number,
-  buyer: string,
-  date: string,
-  status: string
-): {
-  name: string
-  kg: number
-  buyer: string
-  date: string
-  status: string
-} {
-  return { name, kg, buyer, date, status }
-}
-
-const rows = [
-  createData('Plástico PET', 120, 'PlastiCycle MX', '2025-10-02', 'Completado'),
-  createData('Cartón Corrugado', 340, 'EcoPapel Logistics', '2025-10-05', 'Pendiente'),
-  createData('Vidrio Verde', 280, 'VidrioCircular', '2025-10-07', 'Pendiente'),
-  createData('Cobre Recuperado', 75, 'MetaRecicla', '2025-10-08', 'Completado'),
-  createData('Aluminio Compactado', 190, 'AlumEco Traders', '2025-10-03', 'Pendiente'),
-  createData('Papel Blanco', 410, 'PapelRenova', '2025-10-06', 'Cancelado'),
-  createData('Plástico HDPE', 260, 'CircularPlast Co.', '2025-10-04', 'Completado'),
-  createData('Chatarra Mixta', 520, 'CobreClave S.A.', '2025-10-01', 'Pendiente'),
-  createData('Electrónicos RAEE', 95, 'ReTech Solutions MX', '2025-10-09', 'Pendiente'),
-  createData('Botellas Transparentes', 145, 'EcoPlast Compras', '2025-10-02', 'Completado')
-]
+import useSells from '@renderer/customHooks/useSells'
+import CompleteSell from '../CompleteSell'
 
 export default function Sells(): React.JSX.Element {
+  const hook = useSells()
+
+  useEffect(() => {
+    hook.getSells()
+  }, [])
 
   return (
     <Grid container spacing={3}>
@@ -56,8 +33,7 @@ export default function Sells(): React.JSX.Element {
       <Grid padding="20px 0 0 0" size={12}>
         <Card sx={{ padding: '20px' }}>
           <Typography fontWeight={'bold'}>Registrar venta</Typography>
-          <SaleForm/>
-
+          <SaleForm />
         </Card>
       </Grid>
 
@@ -69,35 +45,38 @@ export default function Sells(): React.JSX.Element {
                 <TableCell align="center">Material</TableCell>
                 <TableCell align="center">Kilos</TableCell>
                 <TableCell align="center">Comprador</TableCell>
-                <TableCell align="center">Fecha</TableCell>
+                {/* <TableCell align="center">Fecha</TableCell> */}
                 <TableCell align="center">Estado de entrega</TableCell>
                 <TableCell align="center">Acción</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
-                <TableRow key={row.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+              {hook.sells.map((row, i) => (
+                <TableRow
+                  key={`item_sell_${i}`}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
                   <TableCell component="th" scope="row">
-                    {row.name}
+                    {row.nombre_material}
                   </TableCell>
-                  <TableCell align="right">{row.kg} kg.</TableCell>
-                  <TableCell align="left">{row.buyer}</TableCell>
-                  <TableCell align="center">
+                  <TableCell align="right">{row.kilos_vendidos} kg.</TableCell>
+                  <TableCell align="left">{row.comprador}</TableCell>
+                  {/* <TableCell align="center">
                     {new Intl.DateTimeFormat('es-MX', {
                       dateStyle: 'medium'
-                    }).format(new Date(row.date))}
-                  </TableCell>
-                  <TableCell align="right">
+                    }).format(new Date(row.))}
+                  </TableCell> */}
+                  <TableCell align="center">
                     <Chip
-                      color={row.status === 'Completado' ? 'success' : 'warning'}
-                      label={row.status}
+                      color={row.entregado === 1 ? 'success' : 'warning'}
+                      label={row.entregado === 1 ? 'Completado' : 'Pendiente'}
                     />
                   </TableCell>
-                  <TableCell align="right">
-                    {row.status === 'Completado' ? (
+                  <TableCell align="center">
+                    {row.entregado === 1 ? (
                       <CheckIcon color="success" />
                     ) : (
-                      <LocalShippingIcon color="info" />
+                      <CompleteSell idVenta={row.id_venta} />
                     )}
                   </TableCell>
                 </TableRow>
