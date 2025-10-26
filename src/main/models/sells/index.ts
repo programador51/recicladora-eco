@@ -32,31 +32,34 @@ export function getAllSells(): SellI[] {
   const db = getDb()
 
   const stmt = db.prepare(`
-    SELECT 
-      v.id_venta,
-      v.id_transaccion,
-      v.kilos_vendidos,
-      v.entregado,
-      c.id_comprador,
-      c.nombre AS comprador,
-      c.precio_kg,
-      c.distancia_km,
-      m.id_material,
-      m.nombre_material,
-      m.ganancia
-    FROM Venta v
-    INNER JOIN Comprador c ON v.id_comprador = c.id_comprador
-    LEFT JOIN Material m ON c.id_material = m.id_material
-    ORDER BY v.id_venta DESC;
+ SELECT 
+    v.id_venta,
+    v.id_transaccion,
+    v.kilos_vendidos,
+    v.entregado,
+    c.id_comprador,
+    c.nombre AS comprador,
+    c.precio_kg,
+    c.distancia_km,
+    m.id_material,
+    m.nombre_material,
+    m.ganancia,
+     COALESCE(le.fecha_salida, NULL) AS fecha_salida,
+    COALESCE(le.fecha_entrega, NULL) AS fecha_entrega
+  FROM Venta v
+  INNER JOIN Comprador c ON v.id_comprador = c.id_comprador
+  LEFT JOIN Material m ON c.id_material = m.id_material
+  LEFT JOIN LogisticaEnvios le ON v.id_venta = le.id_venta
+  ORDER BY v.id_venta DESC;
   `)
 
   const ventas = stmt.all()
+
   return ventas as SellI[]
 }
 
 export function markSellAsDelivered(idVenta: number): void {
   const db = getDb();
-  console.log("Marking sale as delivered for idVenta:", idVenta);
   const stmt = db.prepare(`UPDATE Venta SET entregado = 1 WHERE id_venta = ?`)
   stmt.run(idVenta)
 }

@@ -13,4 +13,6 @@ export interface MainWorldApi {
   addSell: (sell: SaleFormData) => Promise<void>;
   getSells: () => Promise<SellI[]>;
   markSellAsDelivered: (idVenta: number) => Promise<void>;
+  createLogisticSend: (data: { id_venta: number; fecha_salida?: string }) => Promise<number>;
+  updateDeliverDate: (id_envio: number, fecha_entrega: string) => Promise<void>;
 }

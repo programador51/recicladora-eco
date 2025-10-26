@@ -3,12 +3,24 @@ import Swal from 'sweetalert2'
 import LocalShippingIcon from '@mui/icons-material/LocalShipping'
 
 export default function CompleteSell({
-  idVenta
+  idVenta,
+  sentDate = null
 }: {
   idVenta: number
-  onConfirmed?: (idVenta: number) => void
+  onConfirmed?: (idVenta: number) => void,
+  sentDate: string | null
 }): React.JSX.Element {
   const handleConfirm = async (): Promise<void> => {
+
+    if(sentDate === null){
+      Swal.fire({
+        title: 'No se puede completar la venta',
+        text: 'La venta no ha sido enviada aún. Logistica debe enviar el material primero.',
+        icon: 'warning'
+      })
+      return;
+    }
+
     const result = await Swal.fire({
       title: '¿Marcar venta como completada?',
       text: 'Esta acción cambiará el estado de la venta a entregada.',
@@ -21,23 +33,8 @@ export default function CompleteSell({
 
     if (result.isConfirmed) {
       try {
-        // alert(idVenta)
-
         window.api.markSellAsDelivered(idVenta).then(()=>window.location.reload());
-        // window.location.reload()
-        // const db = getDb()
-        // const stmt = db.prepare(`UPDATE Venta SET entregado = 1 WHERE id_venta = ?`)
-        // stmt.run(idVenta)
 
-        // await Swal.fire({
-        //   title: 'Completado',
-        //   text: 'La venta se ha marcado como entregada.',
-        //   icon: 'success',
-        //   timer: 2000,
-        //   showConfirmButton: false,
-        // })
-
-        // if (onConfirmed) onConfirmed(idVenta) // callback to refresh UI
       } catch (error) {
         console.error('Error al actualizar la venta:', error)
         Swal.fire({

@@ -5,5 +5,6 @@ export interface Buyers {
   precio_kg: number
   nombre_material: string
   demanda: string
-  calidad: string
+  calidad: string;
+  id_material: number;
 }

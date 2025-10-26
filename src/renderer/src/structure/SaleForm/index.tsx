@@ -35,6 +35,8 @@ export default function SaleForm(): React.JSX.Element {
   const {
     control,
     handleSubmit,
+    watch,
+    setValue,
     formState: { errors }
   } = useForm<SaleFormData>({
     resolver: yupResolver(schema),
@@ -43,7 +45,9 @@ export default function SaleForm(): React.JSX.Element {
       weightKg: 0,
       seller: 0
     }
-  })
+  });
+
+  const id_material = watch('material');
 
   const onSubmit = async (data): Promise<void> => {
     window.api
@@ -71,7 +75,10 @@ export default function SaleForm(): React.JSX.Element {
           <div>
             <MaterialSelect
               {...field}
-              onChange={(value) => field.onChange(+value.id)}
+              onChange={(value) => {
+                field.onChange(+value.id);
+                setValue('seller', null);
+              }}
               onlyAvailable={true}
             />
             <ErrorMessageAtom error={errors.material} />
@@ -98,7 +105,10 @@ export default function SaleForm(): React.JSX.Element {
         render={({ field }) => (
           <div>
             <SellerInput
+              
               {...field}
+              idMaterial={id_material}
+              disabled={typeof id_material !== 'number'}
               onChange={(value) => field.onChange(+(value.target.value as string))}
             />
             <ErrorMessageAtom error={errors.seller} />

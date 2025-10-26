@@ -49,7 +49,13 @@ export default function MaterialSelect({
             if (!selected) {
               return <span style={{ color: '#aaa' }}>Selecciona un material</span>
             }
-            return hook.items.find((item) => item.id === selected)?.material
+
+            const item = hook.items.find((item) => item.id === selected)
+
+            if(!item) return '?'
+
+            return `${item.material}`
+            // return `[${item.id}] - ${item.material}`
           }}
           labelId={id.current}
           id={`${id.current}-id`}

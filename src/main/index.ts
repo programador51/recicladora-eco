@@ -9,6 +9,7 @@ import { MaterialFormInsert } from '../renderer/src/helpers/validations/earnings
 import { ensureDefaultUser } from './models/users'
 import { getBuyers, seedCompradoresIfEmpty } from './models/buyers'
 import { getAllSells, insertSell, markSellAsDelivered, SaleFormData } from './models/sells'
+import { createLogisticSend, updateDeliverDate } from './models/logistic'
 
 function createWindow(): void {
   // Create the browser window.
@@ -122,6 +123,17 @@ ipcMain.handle('add-sell', async (_, sell: SaleFormData) => {
 
 ipcMain.handle('get-sells', async () => {
   return getAllSells()
+})
+
+ipcMain.handle(
+  'create-logistic-send',
+  async (_, data: { id_venta: number; fecha_salida?: string }) => {
+    return createLogisticSend(data)
+  }
+)
+
+ipcMain.handle('update-deliver-date', async (_, id_envio: number, fecha_entrega: string) => {
+  return updateDeliverDate(id_envio, fecha_entrega)
 })
 
 ipcMain.handle('mark-sell-as-delivered', async (_, idVenta: number) => {

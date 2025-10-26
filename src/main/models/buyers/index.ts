@@ -91,6 +91,7 @@ export function getBuyers(): Buyers[] {
         c.nombre,
         c.distancia_km,
         c.precio_kg,
+        m.id_material,
         m.nombre_material,
         m.demanda,
         m.calidad

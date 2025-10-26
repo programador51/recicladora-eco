@@ -20,8 +20,8 @@ export default function useManagmentMaterial(): ReturnUseManagmentMaterials {
         { totalKg: 0, totalVol: 0 }
       )
 
-      const remaingKg = 1000 - totals.totalKg
-      const remaingVol = 1000 - totals.totalVol
+      const remaingKg = +((1000 - totals.totalKg).toFixed(2))
+      const remaingVol = +((10 - totals.totalVol).toFixed(2))
 
       setState((current) => ({
         ...current,

@@ -45,7 +45,7 @@ export default function Sells(): React.JSX.Element {
                 <TableCell align="center">Material</TableCell>
                 <TableCell align="center">Kilos</TableCell>
                 <TableCell align="center">Comprador</TableCell>
-                {/* <TableCell align="center">Fecha</TableCell> */}
+                <TableCell align="center">Enviado</TableCell>
                 <TableCell align="center">Estado de entrega</TableCell>
                 <TableCell align="center">Acción</TableCell>
               </TableRow>
@@ -61,11 +61,11 @@ export default function Sells(): React.JSX.Element {
                   </TableCell>
                   <TableCell align="right">{row.kilos_vendidos} kg.</TableCell>
                   <TableCell align="left">{row.comprador}</TableCell>
-                  {/* <TableCell align="center">
-                    {new Intl.DateTimeFormat('es-MX', {
+                  <TableCell align="center">
+                    {row.fecha_salida === null ? 'Pendiente de envío' : new Intl.DateTimeFormat('es-MX', {
                       dateStyle: 'medium'
-                    }).format(new Date(row.))}
-                  </TableCell> */}
+                    }).format(new Date(row.fecha_salida))}
+                  </TableCell>
                   <TableCell align="center">
                     <Chip
                       color={row.entregado === 1 ? 'success' : 'warning'}
@@ -73,10 +73,13 @@ export default function Sells(): React.JSX.Element {
                     />
                   </TableCell>
                   <TableCell align="center">
-                    {row.entregado === 1 ? (
+                    {row.fecha_entrega !== null ? (
                       <CheckIcon color="success" />
                     ) : (
-                      <CompleteSell idVenta={row.id_venta} />
+
+                      <CompleteSell idVenta={row.id_venta} sentDate={row.fecha_salida}/>
+
+                      
                     )}
                   </TableCell>
                 </TableRow>

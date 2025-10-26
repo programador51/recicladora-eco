@@ -10,7 +10,12 @@ const api: MainWorldApi = {
   getBuyers: () => ipcRenderer.invoke('get-buyers'),
   addSell: (sell) => ipcRenderer.invoke('add-sell', sell),
   getSells: () => ipcRenderer.invoke('get-sells'),
-  markSellAsDelivered: (idVenta: number) => ipcRenderer.invoke('mark-sell-as-delivered', idVenta)
+  markSellAsDelivered: (idVenta: number) => ipcRenderer.invoke('mark-sell-as-delivered', idVenta),
+  createLogisticSend: (data: { id_venta: number; fecha_salida?: string }) =>
+    ipcRenderer.invoke('create-logistic-send', data),
+
+  updateDeliverDate: (id_envio: number, fecha_entrega: string) =>
+    ipcRenderer.invoke('update-deliver-date', id_envio, fecha_entrega)
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to
