@@ -7,7 +7,10 @@ import { MaterialForm, materialSchema } from '@renderer/helpers/validations/earn
 
 export default function useEarnings(): ReturnUseEarnings {
   const form = useForm<MaterialForm>({
-    resolver: yupResolver(materialSchema)
+    resolver: yupResolver(materialSchema),
+    defaultValues: {
+      pureza:'media'
+    }
   })
 
   const onSubmit = (data: MaterialForm): void => {

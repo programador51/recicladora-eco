@@ -28,7 +28,9 @@ export default function useManagmentMaterial(): ReturnUseManagmentMaterials {
         materials: value.filter((item) => item.total_kilos > 0),
         ...totals,
         remaingKg,
-        remaingVol
+        remaingVol,
+        totalKg: +totals.totalKg.toFixed(2),
+        totalVol: +totals.totalVol.toFixed(2)
       }))
     })
   }, [])

@@ -71,16 +71,9 @@ export default function Logistic(): React.JSX.Element {
             Planificar envíos
           </Typography>
 
-          <Typography>Fecha de salida</Typography>
-          <input type="date" name="" id="" max={new Date().toISOString().split('T')[0]} />
-
-          <Typography fontWeight={'bold'} marginTop={2}>
-            Lotes pendientes de envío
-          </Typography>
-
           <PendingLotsForm/>
 
-          <Typography fontWeight={'bold'} marginBottom={1}>
+          {/* <Typography fontWeight={'bold'} marginBottom={1}>
             Resumen del envío:
           </Typography>
 
@@ -96,7 +89,7 @@ export default function Logistic(): React.JSX.Element {
 
           <Typography variant="caption" fontStyle={'italic'} color="textDisabled">
             Cálculo basado en una velocidad promedio de 60km/h.
-          </Typography>
+          </Typography> */}
         </Card>
       </Grid>
     </Grid>

@@ -13,6 +13,22 @@ const rows = [
   {
     matricula: '1731168',
     nombre: 'José Luis Pérez Olguín'
+  },
+  {
+    matricula: '1729672',
+    nombre:'Gerardo Raul Pineda Hernandez'
+  },
+  {
+    nombre:"Jorge Gael Cardona Reyna",
+    matricula:'2014917'
+  },
+  {
+    nombre:'Ingrid Natalia Rangel Moreno',
+    matricula:`2069782`
+  },
+  {
+    nombre:'Marco Antonio Puente Espinoza',
+    matricula:'2109488'
   }
 ]
 
@@ -51,6 +67,7 @@ function App(): React.JSX.Element {
 
         <TableContainer>
           <Table
+            size='small'
             sx={{ width: '50%', justifyContent: 'center', margin: '40px 25%' }}
             aria-label="simple table"
           >
