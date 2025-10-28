@@ -10,9 +10,7 @@ import { ensureDefaultUser } from './models/users'
 import { getBuyers, seedCompradoresIfEmpty } from './models/buyers'
 import { getAllSells, insertSell, markSellAsDelivered, SaleFormData } from './models/sells'
 import { createLogisticSend, updateDeliverDate } from './models/logistic'
-import { generateProfessionalReportPDF } from './models/reports'
-import os from 'os'
-import { writeFile } from 'fs/promises'
+
 
 function createWindow(): void {
   // Create the browser window.
@@ -141,13 +139,6 @@ ipcMain.handle('update-deliver-date', async (_, id_envio: number, fecha_entrega:
 
 ipcMain.handle('mark-sell-as-delivered', async (_, idVenta: number) => {
   return markSellAsDelivered(idVenta)
-})
-
-ipcMain.handle('get-report-pdf', async () => {
-  const buffer = await generateProfessionalReportPDF()
-  const downloadsPath = join(os.homedir(), 'Downloads', 'reporte_profesional.pdf')
-  await writeFile(downloadsPath, buffer)
-  return downloadsPath
 })
 
 ipcMain.handle('insert-material', async (_, material: MaterialFormInsert) => {
