@@ -77,7 +77,7 @@ export default function SaleForm(): React.JSX.Element {
               {...field}
               onChange={(value) => {
                 field.onChange(+value.id);
-                setValue('seller', null);
+                setValue('seller', 0);
               }}
               onlyAvailable={true}
             />

@@ -10,6 +10,7 @@ import MagamentMaterial from './structure/ManagementMaterial'
 import Sells from './structure/Sells'
 import AmbientImpact from './structure/AmbientImpact'
 import Logistic from './structure/Logistic'
+import Reports from './structure/Reports'
 
 createRoot(document.getElementById('root')!).render(
   <HashRouter>
@@ -52,14 +53,7 @@ createRoot(document.getElementById('root')!).render(
           }
         />
 
-                <Route
-          path={`/${reportes}`}
-          element={
-            <Layout>
-              <p>En desarrollo</p>
-            </Layout>
-          }
-        />
+        <Route path={`/${reportes}`} element={<Reports />} />
 
         <Route
           path={`/${logistica}`}

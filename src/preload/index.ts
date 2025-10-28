@@ -5,6 +5,7 @@ import { MainWorldApi } from './types'
 // Custom APIs for renderer
 const api: MainWorldApi = {
   getMaterials: () => ipcRenderer.invoke('get-materials'),
+  getReportPdf: () => ipcRenderer.invoke('get-report-pdf'),
   insertMaterial: (material) => ipcRenderer.invoke('insert-material', material),
   getInventory: () => ipcRenderer.invoke('get-inventory'),
   getBuyers: () => ipcRenderer.invoke('get-buyers'),

@@ -35,7 +35,10 @@ export function seedCompradoresIfEmpty(): void {
       insertMaterial.run(m)
     }
 
-    const materialRows = db.prepare('SELECT id_material, nombre_material FROM Material').all()
+    const materialRows = db.prepare('SELECT id_material, nombre_material FROM Material').all() as {
+      id_material: string
+      nombre_material: string
+    }[]
 
     const compradores = [
       {
