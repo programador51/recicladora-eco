@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Grid from '@mui/material/Grid'
 import { Typography, Stack } from '@mui/material'
 import Card from '@mui/material/Card'
@@ -6,30 +6,53 @@ import ParkIcon from '@mui/icons-material/Park'
 import WaterDropIcon from '@mui/icons-material/WaterDrop'
 import BoltIcon from '@mui/icons-material/Bolt'
 import CloudIcon from '@mui/icons-material/Cloud'
+import useEarnings from '@renderer/customHooks/useEarnings'
+import { calcularImpacto } from '@renderer/helpers/earnings'
 
 export default function AmbientImpact(): React.JSX.Element {
+
+  const [ambient,setAmbient] = useState({
+    arboles: 0,
+    agua: 0,
+    energia: 0,
+    co2: 0
+})
+
+  const hook = useEarnings()
+
+  useEffect(()=>{
+    setAmbient(calcularImpacto(hook.items))
+    
+  },[hook.items])
+
   const items = [
     {
       label: 'Árboles salvados',
       value: '1.61',
-      icon: <ParkIcon sx={{ fontSize: 40, color: 'green' }} />
+      icon: <ParkIcon sx={{ fontSize: 40, color: 'green' }} />,
+      key:'arboles'
     },
     {
       label: 'Litros de agua ahorrados',
       value: '5,000',
-      icon: <WaterDropIcon sx={{ fontSize: 40, color: 'blue' }} />
+      icon: <WaterDropIcon sx={{ fontSize: 40, color: 'blue' }} />,
+      key:'agua'
     },
     {
       label: 'Energía ahorrada (kWh)',
       value: '3,000',
-      icon: <BoltIcon sx={{ fontSize: 40, color: 'yellow' }} />
+      icon: <BoltIcon sx={{ fontSize: 40, color: 'yellow' }} />,
+      key:'energia'
     },
     {
       label: 'Emisiones de CO2 evitadas (kg)',
       value: '2,500',
-      icon: <CloudIcon sx={{ fontSize: 40, color: 'gray' }} />
+      icon: <CloudIcon sx={{ fontSize: 40, color: 'gray' }} />,
+      key:'co2'
     }
-  ]
+  ];
+
+  
 
   return (
     <Grid container spacing={3}>
@@ -56,7 +79,7 @@ export default function AmbientImpact(): React.JSX.Element {
                 {item.icon}
                 <Stack flexDirection={'row'} gap={1}>
                   <Typography textAlign={'center'}>{item.label}:</Typography>
-                  <Typography fontWeight={'bold'}>{item.value}</Typography>
+                  <Typography fontWeight={'bold'}>{ambient[item.key]}</Typography>
                 </Stack>
               </Stack>
             ))}
