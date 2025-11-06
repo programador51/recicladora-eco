@@ -1,4 +1,5 @@
-import { Earn } from '@renderer/atoms/EarningItem/types'
+// import { Earn } from '@renderer/atoms/EarningItem/types'
+import { Earn } from '../../atoms/EarningItem/types';
 import { Pureza } from '../../molecules/QualityMaterialInput'
 
 export function calcularGanancia(peso: number, precioBase: number, pureza: Pureza): number {

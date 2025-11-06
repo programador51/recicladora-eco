@@ -11,26 +11,67 @@ import TableRow from '@mui/material/TableRow'
 
 const rows = [
   {
-    matricula: '1731168',
-    nombre: 'José Luis Pérez Olguín'
+    "nombre": "Daniel Alexander Vélez Rojas",
+    "matricula": "2006856",
+    "carrera": "IAS"
   },
   {
-    matricula: '1729672',
-    nombre:'Gerardo Raul Pineda Hernandez'
+    "nombre": "Diego Jauregui Gallardo",
+    "matricula": "2014213",
+    "carrera": "IAS"
   },
   {
-    nombre:"Jorge Gael Cardona Reyna",
-    matricula:'2014917'
+    "nombre": "Frida Jaziry Juárez Fuentes",
+    "matricula": "2028420",
+    "carrera": "IAS"
   },
   {
-    nombre:'Ingrid Natalia Rangel Moreno',
-    matricula:`2069782`
+    "nombre": "Gerardo Raúl Pineda Hernández",
+    "matricula": "1729672",
+    "carrera": "IAS"
   },
   {
-    nombre:'Marco Antonio Puente Espinoza',
-    matricula:'2109488'
+    "nombre": "Ingrid Natalia Rangel Moreno",
+    "matricula": "2069782",
+    "carrera": "IAS"
+  },
+  {
+    "nombre": "Jesús Alberto Garza González",
+    "matricula": "1845395",
+    "carrera": "IAS"
+  },
+  {
+    "nombre": "Jorge Gael Cardona Reyna",
+    "matricula": "2014917",
+    "carrera": "IAS"
+  },
+  {
+    "nombre": "José Luis Pérez Olguín",
+    "matricula": "1731168",
+    "carrera": "IAS"
+  },
+  {
+    "nombre": "Juan Carlos Rangel Ocejo",
+    "matricula": "2053389",
+    "carrera": "IAS"
+  },
+  {
+    "nombre": "Luis Daniel Hernández Sánchez",
+    "matricula": "2023156",
+    "carrera": "IAS"
+  },
+  {
+    "nombre": "Marco Antonio Puente Espinoza",
+    "matricula": "2109488",
+    "carrera": "IAS"
+  },
+  {
+    "nombre": "Marcos Maximiliano González Garza",
+    "matricula": "2007519",
+    "carrera": "IAS"
   }
 ]
+
 
 function App(): React.JSX.Element {
   // const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
